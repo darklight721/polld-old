@@ -59,22 +59,22 @@ section.body {
 
     form {
         display: block;
-        width: 50%;
+        width: 60%;
         margin: auto;
-        padding: 10px;
+        padding: 10px; 
+        border-radius: 5px;
+        background-color: rgba(0,0,0,0.1);
 
         input {
             display: block;
-            width: 300px;
             padding: 5px 10px;
 
-            background-color: rgba(255,255,255,0.4);
+            background-color: rgba(255, 255, 255, 0.8);
             border: none;
-            border-right: solid 3px $green;
-            border-radius: 5px 0px 0px 5px;
+            border-radius: 5px;
             outline: none;
             
-            font-family: tahoma, sans-serif;
+            font-family: $font, sans-serif;
             font-size: 1.5em;
             color: $green;
         }
@@ -84,8 +84,15 @@ section.body {
         }
 
         input.question {
-            width: 100%;
-            font-size: 2em;
+            font-size: 3em;
+        }
+
+        input.ng-invalid.ng-dirty {
+            background-color: rgba(157, 38, 29, 0.3);
+        }
+
+        ul li {
+            list-style-type: none;
         }
     }
 }

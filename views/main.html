@@ -1,6 +1,12 @@
 <form>
-	<input class="name" type="text" />
-	<input class="question" type="text" />
-	<input type="text" />
-	<button type="button">Add</button>
+	<input class="question" ng-model="poll.description" type="text" placeholder="Type the description of your poll here." required />
+	<input class="name" ng-model="poll.owner" type="text" />
+	<ul>
+		<li ng-repeat="choice in poll.choices">
+			<input type="text" class="choice" ng-model="choice" required />
+			<button type="button" ng-click="removeChoice($index)">Remove</button>
+		</li>
+	</ul>
+	<input type="text" ng-model="newChoice" required />
+	<button type="button" ng-click="addChoice()">Add</button>
 </form>
