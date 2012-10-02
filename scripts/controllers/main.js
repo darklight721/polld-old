@@ -5,13 +5,13 @@ polldApp.controller('MainCtrl', function($scope) {
   
   $scope.addChoice = function() {
   	if ($scope.newChoice) {
-		$scope.poll.choices.push($scope.newChoice);
-		$scope.newChoice = '';
-	}
+  		$scope.poll.choices.push($scope.newChoice);
+  		$scope.newChoice = '';
+  	}
   };
   
   $scope.removeChoice = function(index) {
-	$scope.poll.choices.splice(index, 1);
+    $scope.poll.choices.splice(index, 1);
   };
 
 });

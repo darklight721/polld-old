@@ -54,12 +54,20 @@ header {
     }
 }
 
+$form-width: 500px;
+$input-padding-width: 10px;
+
+@mixin form-font-style {
+    font-family: $font, sans-serif;
+    font-size: 2em;
+}
+
 section.body {
     clear: both;
 
     form {
         display: block;
-        width: 60%;
+        width: $form-width;
         margin: auto;
         padding: 10px; 
         border-radius: 5px;
@@ -67,15 +75,14 @@ section.body {
 
         input {
             display: block;
-            padding: 5px 10px;
+            padding: 5px $input-padding-width;
 
             background-color: rgba(255, 255, 255, 0.8);
             border: none;
             border-radius: 5px;
             outline: none;
             
-            font-family: $font, sans-serif;
-            font-size: 1.5em;
+            @include form-font-style;
             color: $green;
         }
 
@@ -84,7 +91,12 @@ section.body {
         }
 
         input.question {
+            width: $form-width - $input-padding-width * 2;
             font-size: 3em;
+        }
+
+        input.choice {
+            width: $form-width / 2;
         }
 
         input.ng-invalid.ng-dirty {
@@ -93,6 +105,43 @@ section.body {
 
         ul li {
             list-style-type: none;
+        }
+
+        button {
+            padding: 5px $input-padding-width;
+            border: none;
+            border-radius: 20px;
+
+            @include form-font-style;
+            color: white;
+
+            cursor: pointer;
+        }
+
+        button.add {
+            background-color: green();
+        }
+
+        button.remove {
+            background-color: rgba(157, 38, 29, 0.3);
+        }
+
+        div.inline {
+            display: inline-block;
+            width: auto;
+            padding: 5px;
+            border-radius: 5px;
+
+            background-color: white;
+
+            * {
+                display: inline-block;
+            }
+
+            input {
+                border: none;
+                background-color: transparent;
+            }
         }
     }
 }
