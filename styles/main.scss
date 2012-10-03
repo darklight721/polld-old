@@ -6,8 +6,20 @@ $font: wire-one;
     background: linear-gradient(to bottom, $color1, $color2);
 }
 
+@mixin transition($property, $duration) {
+    -webkit-transition: $property $duration;
+       -moz-transition: $property $duration;
+        -ms-transition: $property $duration;
+         -o-transition: $property $duration;
+            transition: $property $duration;
+}
+
 @function green($alpha: 1) {
     @return rgba(82, 202, 158, $alpha);
+}
+
+@function red($alpha: 1) {
+    @return rgba(157, 38, 29, $alpha);
 }
 
 html, body {
@@ -20,16 +32,24 @@ body {
     @include bg-linear-gradient(#d1dde1, #b4c9d2);
 }
 
+ul {
+    -webkit-padding-start: 0px;
+    li {
+        list-style-type: none;
+    }
+}
+
 header {
-    clear: both;
+    margin: 10px;
+    text-align: center;
     
     img {
-        float: left;
+        margin: 0px 20px;
+        vertical-align: middle;
     }
     
     nav {
-        float: left;
-        margin-top: 10px;
+        display: inline-block;
         
         font-size: 2em;
         font-weight: bold;
@@ -38,8 +58,10 @@ header {
         ul {
             li {
                 display: inline-block;
-                margin-left: 20px;
-                list-style-type: none;
+                margin: 0px 20px;
+                border-bottom: solid 3px rgba(255,255,255,0);
+
+                @include transition(border, 0.5s);
                 
                 a {
                     text-decoration: none;
@@ -54,68 +76,74 @@ header {
     }
 }
 
-$form-width: 500px;
-$input-padding-width: 10px;
-
-@mixin form-font-style {
-    font-family: $font, sans-serif;
-    font-size: 2em;
-}
-
 section.body {
-    clear: both;
+    margin: 10px;
+    margin-top: 30px;
+
+    @mixin form-font-style {
+        font-family: $font, sans-serif;
+        font-size: 2em;
+    }
 
     form {
+        $form-width: 600px;
+        $input-padding-width: 10px;
+
         display: block;
         width: $form-width;
         margin: auto;
-        padding: 10px; 
-        border-radius: 5px;
-        background-color: rgba(0,0,0,0.1);
+        text-align: center;
 
         input {
             display: block;
             padding: 5px $input-padding-width;
+            margin: auto;
 
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.3);
             border: none;
             border-radius: 5px;
             outline: none;
             
             @include form-font-style;
             color: $green;
-        }
 
-        input:focus {
-            background-color: #fff;
+            @include transition(background-color, 0.5s);
         }
 
         input.question {
-            width: $form-width - $input-padding-width * 2;
-            font-size: 3em;
+            width: 90%;
+            font-size: 4em;
         }
 
         input.choice {
             width: $form-width / 2;
         }
 
+        input:focus, input:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
         input.ng-invalid.ng-dirty {
-            background-color: rgba(157, 38, 29, 0.3);
+            background-color: rgba(255, 0, 0, 0.4);
         }
 
         ul li {
-            list-style-type: none;
+            margin-bottom: 5px;
         }
 
         button {
+            width: 80px;
             padding: 5px $input-padding-width;
             border: none;
             border-radius: 20px;
 
             @include form-font-style;
             color: white;
+            opacity: 0.5;
 
             cursor: pointer;
+
+            @include transition(opacity, 0.5s);
         }
 
         button.add {
@@ -123,25 +151,34 @@ section.body {
         }
 
         button.remove {
-            background-color: rgba(157, 38, 29, 0.3);
+            background-color: red();
+        }
+
+        button:hover {
+            opacity: 1;
         }
 
         div.inline {
             display: inline-block;
-            width: auto;
             padding: 5px;
             border-radius: 5px;
 
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.3);
+            @include transition(background-color, 0.5s);
 
             * {
                 display: inline-block;
             }
 
             input {
+                margin-right: 5px;
                 border: none;
                 background-color: transparent;
             }
+        }
+
+        div.inline:hover {
+            background-color: rgba(255, 255, 255, 0.6);
         }
     }
 }

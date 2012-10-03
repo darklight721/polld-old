@@ -1,6 +1,5 @@
 <form>
 	<input class="question" ng-model="poll.description" type="text" placeholder="Type your poll question here." required />
-	<input class="name" ng-model="poll.owner" type="text" />
 	<ul>
 		<li ng-repeat="choice in poll.choices">
 			<div class="inline">
@@ -9,6 +8,6 @@
 		</li>
 	</ul>
 	<div class="inline">
-		<input type="text" class="choice" ng-model="newChoice" /><button type="button" class="add" ng-click="addChoice()">Add</button>
+		<input type="text" class="choice" ng-model="newChoice" placeholder="Add some poll choices here." /><button type="button" class="add" ng-click="addChoice()">Add</button>
 	</div>
 </form>
