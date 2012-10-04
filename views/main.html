@@ -8,6 +8,8 @@
 		</li>
 	</ul>
 	<div class="inline">
-		<input type="text" class="choice" ng-model="newChoice" placeholder="Add some poll choices here." /><button type="button" class="add" ng-click="addChoice()">Add</button>
+		<input type="text" class="choice" ng-model="newChoice" placeholder="Add some poll choices here." ng-enter="addChoice()" />
+		<button type="button" class="add" ng-click="addChoice()">Add</button>
 	</div>
+	<button type="button" class="post">Post</button>
 </form>

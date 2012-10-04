@@ -87,7 +87,7 @@ section.body {
 
     form {
         $form-width: 600px;
-        $input-padding-width: 10px;
+        $input-padding: 5px 10px;
 
         display: block;
         width: $form-width;
@@ -96,7 +96,7 @@ section.body {
 
         input {
             display: block;
-            padding: 5px $input-padding-width;
+            padding: $input-padding;
             margin: auto;
 
             background-color: rgba(255, 255, 255, 0.3);
@@ -133,7 +133,7 @@ section.body {
 
         button {
             width: 80px;
-            padding: 5px $input-padding-width;
+            padding: $input-padding;
             border: none;
             border-radius: 20px;
 
@@ -152,6 +152,16 @@ section.body {
 
         button.remove {
             background-color: red();
+        }
+
+        button.post {
+            display: block;
+            width: $form-width / 3;
+            margin: 15px auto;
+
+            font-size: 3em;
+
+            background-color: green();
         }
 
         button:hover {

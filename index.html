@@ -20,22 +20,20 @@
             <![endif]-->
     
             <!-- Add your site or application content here -->
-            <header ng-controller="HeaderCtrl">
-                <nav>
-                    <ul>
-                        <li ng-class="links.home"><a href="#">Create</a></li>
-                        <li ng-class="links.list"><a href="#/list">List</a></li>
-                    </ul>
-                </nav>
+            <header>
+                <nav-list>
+                    <nav-item path="/">Create</nav-item>
+                    <nav-item path="/list">List</nav-item>
+                </nav-list>
                 <img src="images/polld_128.png" alt="polld" width="128px" height="128px" />
-                <nav>
-                    <ul>
-                        <li ng-class="links.about"><a href="#/about">About</a></li>
-                        <li ng-class="links.contact"><a href="#/contact">Contact</a></li>
-                    </ul>
-                </nav>
+                <nav-list>
+                    <nav-item path="/about">About</nav-item>
+                    <nav-item path="/contact">Contact</nav-item>
+                </nav-list>
             </header>
+
             <section class="body" ng-view></section>
+
             <footer></footer>
         </div>
 
@@ -44,7 +42,6 @@
         <!-- build:js scripts/scripts.js -->
         <script src="scripts/polld.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/header.js"></script>
         <!-- endbuild -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
