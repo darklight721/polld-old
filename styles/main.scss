@@ -3,7 +3,8 @@ $font: wire-one;
 
 @mixin bg-linear-gradient($color1, $color2) {
     background: -webkit-linear-gradient(top, $color1, $color2);
-    background: linear-gradient(to bottom, $color1, $color2);
+    background:    -moz-linear-gradient(top, $color1, $color2);
+    background:         linear-gradient(to bottom, $color1, $color2);
 }
 
 @mixin transition($property, $duration) {
@@ -34,6 +35,7 @@ body {
 
 ul {
     -webkit-padding-start: 0px;
+    padding-left: 0px;
     li {
         list-style-type: none;
     }
