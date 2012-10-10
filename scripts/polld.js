@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var polldApp = angular.module('polldApp', [])
+var polldApp = angular.module('polldApp', ['dpdwire'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
@@ -16,6 +16,10 @@ var polldApp = angular.module('polldApp', [])
       })
       .when('/contact', {
         templateUrl: 'views/contact.html'
+      })
+      .when('/:id', {
+        templateUrl: 'views/vote.html',
+        controller: 'VoteCtrl'
       })
       .otherwise({
         redirectTo: '/'
