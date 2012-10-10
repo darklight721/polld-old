@@ -18,7 +18,7 @@ polldApp.controller('MainCtrl', function($scope, Polls) {
   };
 
   $scope.save = function() {
-    if (form.$valid) {
+    if ($scope.form.$valid) {
       Polls.post(angular.toJson($scope.poll), function(results, error){
         console.log(results + ' ' + error);
       });
