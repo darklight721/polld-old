@@ -3,13 +3,12 @@
 	<ul>
 		<li ng-repeat="choice in poll.choices">
 			<div class="inline">
-				<input type="text" class="choice" ng-model="choice.name" required /><button type="button" class="remove" ng-click="removeChoice($index)">Remove</button>
+				<input type="text" class="choice" ng-model="choice.name" required /><button type="button" class="remove" ng-click="removeChoice($index)">-</button>
 			</div>
 		</li>
 	</ul>
 	<div class="inline">
-		<input type="text" class="choice" ng-model="newChoice" placeholder="Add some poll choices here." ng-enter="addChoice()" />
-		<button type="button" class="add" ng-click="addChoice()">Add</button>
+		<input type="text" class="choice" ng-model="newChoice" placeholder="Add some poll choices here." ng-enter="addChoice()" /><button type="button" class="add" ng-click="addChoice()">+</button>
 	</div>
 	<button type="button" class="post" ng-click="save()">Post</button>
 </form>

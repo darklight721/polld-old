@@ -1,10 +1,16 @@
 $green: #52ca9e;
 $orange: #ff6600;
+
 $font: wire-one;
+$font2: 'PT Sans Caption';
+
+$radius: 3px;
 
 @mixin bg-linear-gradient($color1, $color2) {
     background: -webkit-linear-gradient(top, $color1, $color2);
     background:    -moz-linear-gradient(top, $color1, $color2);
+    background:     -ms-linear-gradient(top, $color1, $color2);
+    background:      -o-linear-gradient(top, $color1, $color2);
     background:         linear-gradient(to bottom, $color1, $color2);
 }
 
@@ -16,12 +22,14 @@ $font: wire-one;
             transition: $property $duration;
 }
 
-@function green($alpha: 1) {
-    @return rgba(82, 202, 158, $alpha);
+@mixin preformat($display: block, $margin: 0, $padding: 0) {
+    display: $display;
+    margin: $margin;
+    padding: $padding;
 }
 
-@function red($alpha: 1) {
-    @return rgba(157, 38, 29, $alpha);
+@mixin emboss {
+    box-shadow: 0px 1px 1px 1px rgba(#808080,0.4), 0px 1px 0px 1px rgba(#fff,0.4) inset;
 }
 
 html, body {
@@ -42,50 +50,45 @@ ul {
     }
 }
 
-header {
-    height: 150px;
-    margin: 0px;
-    padding: 0px;
+input {
+    outline: none;
+}
 
-    border-top: solid 5px #ff6600;
-    box-shadow: 0 1px 3px 1px rgba(0,0,0,0.1);
+header {
+    @include preformat();
+    height: 150px;
+
+    border-top: solid 5px $orange;
+    box-shadow: 0 1px 3px 1px rgba(#000,0.1);
     @include bg-linear-gradient(#f4f4f4, #fff);
 
     text-align: center;
     overflow: hidden;
     
     nav {
-        display: inline-block;
+        @include preformat(inline-block);
         height: 100%;
-        margin: 0px;
-        padding: 0px;
-        color: #aaa; 
         
-        font-family: verdana;
-        font-size: 0.8em;
-        font-weight: bold;
+        font-family: $font2;
+        font-size: 0.9em;
         text-transform: uppercase;
+        color: #aaa;
         
         vertical-align: top;
         
         ul {
+            @include preformat();
             height: 100%;
-            margin: 0px;
-            padding: 0px;
 
             li {
-                display: inline-block;
+                @include preformat(inline-block, 0px, 0px 20px);
                 width: 80px;
                 height: 102%; // exceed a bit to hide the bottom box-shadow when active
-                margin: 0px;
-                padding: 0px 20px;
                 
                 a {
-                    display: block;
+                    @include preformat();
                     width: 100%;
                     height: 100%;
-                    margin: 0px;
-                    padding: 0px;
                     padding-top: 80%;
                     
                     color: inherit;
@@ -95,29 +98,28 @@ header {
             
             li.active {
                 color: $orange;
-                box-shadow: 0 0 3px 0px rgba(0,0,0,0.1) inset;
+                box-shadow: 0 0 3px 0px rgba(#000,0.1) inset;
                 @include bg-linear-gradient(#eaeaea, #fff);
             }
 
             li:hover {
-                box-shadow: 0 0 3px 0px rgba(0,0,0,0.1) inset;
+                box-shadow: 0 0 3px 0px rgba(#000,0.1) inset;
                 @include bg-linear-gradient(#eaeaea, #fff);
             }
         }
     }
 
     span.brand {
-        display: inline-block;
-        margin: 0px 10px;
-        padding: 30px 20px;
+        @include preformat(inline-block, 0px 10px, 30px 20px);
 
-        border-radius: 0px 0px 10px 10px;
+        border-radius: 0px 0px $radius $radius;
         box-shadow: 0 0 5px 1px rgba(0,0,0,0.2);
         @include bg-linear-gradient($orange, #ff8800);
 
-        color: white;
+        color: rgba(#fff,0.8);
         font-size: 4em;
         font-weight: bold;
+        text-shadow: -1px -1px rgba(#808080,0.5);
         cursor: pointer;
 
         @include transition(padding, 0.5s);
@@ -132,115 +134,121 @@ section.body {
     margin: 10px;
     margin-top: 30px;
 
-    @mixin form-font-style {
-        font-family: $font, sans-serif;
-        font-size: 2em;
-    }
-
     form {
-        $form-width: 600px;
-        $input-padding: 5px 10px;
+        @include preformat(block, auto, 0px);
+        width: 900px;
 
-        display: block;
-        width: $form-width;
-        margin: auto;
+        font-family: $font2, sans-serif;
         text-align: center;
 
-        input {
-            display: block;
-            padding: $input-padding;
-            margin: auto;
-
-            background-color: rgba(255, 255, 255, 0.3);
-            border: none;
-            border-radius: 5px;
-            outline: none;
-            
-            @include form-font-style;
-            color: $green;
-
-            @include transition(background-color, 0.5s);
-        }
-
         input.question {
-            width: 90%;
-            font-size: 4em;
+            @include preformat(inline-block, 0px, 10px);
+            width: 450px;
+
+            border: solid 5px $orange;
+            border-radius: $radius;
+            @include emboss;
+            @include bg-linear-gradient(#fff,#eaeaea);
+
+            font-family: wire-one;
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+            color: $orange;
+            
+            overflow: hidden;
         }
 
-        input.choice {
-            width: $form-width / 2;
-        }
-
-        input:focus, input:hover {
-            background-color: rgba(255, 255, 255, 0.6);
-        }
-
-        input.ng-invalid.ng-dirty {
-            background-color: rgba(255, 0, 0, 0.4);
+        input.question:focus {
+            @include bg-linear-gradient(#fff,#fff);
         }
 
         ul li {
-            margin-bottom: 5px;
-        }
-
-        button {
-            width: 80px;
-            padding: $input-padding;
-            border: none;
-            border-radius: 20px;
-
-            @include form-font-style;
-            color: white;
-            opacity: 0.5;
-
-            cursor: pointer;
-
-            @include transition(opacity, 0.5s);
-        }
-
-        button.add {
-            background-color: green();
-        }
-
-        button.remove {
-            background-color: red();
-        }
-
-        button.post {
-            display: block;
-            width: $form-width / 3;
-            margin: 15px auto;
-
-            font-size: 3em;
-
-            background-color: green();
-        }
-
-        button:hover {
-            opacity: 1;
+            display: inline-block;
         }
 
         div.inline {
-            display: inline-block;
-            padding: 5px;
-            border-radius: 5px;
-
-            background-color: rgba(255, 255, 255, 0.3);
-            @include transition(background-color, 0.5s);
+            @include preformat(inline-block, 0px 0px 5px 5px, 0px);
+            
+            border-radius: $radius;
+            @include emboss;
+            @include bg-linear-gradient(#ff8800,$orange);
+            
+            overflow: hidden;
 
             * {
-                display: inline-block;
+                @include preformat(inline-block, 6px, 5px);
+                border: none;
+                
+                background-color: transparent;
+                font-size: 2em;
+                
+                @include transition(null,0.3s);
+            }
+
+            @mixin shadow($inset:null) {
+                box-shadow: 0 0 3px 1px rgba(#000,0.2) $inset;
             }
 
             input {
-                margin-right: 5px;
-                border: none;
+                width: 250px;
+    
+                border-radius: $radius;
+                @include shadow(inset);
+                background-color: rgba(#000,0.1);
+                
+                font-family: wire-one;
+                font-weight: bold;
+                color: white;
+            }
+
+            input:focus {
                 background-color: transparent;
+                @include shadow;
+            }
+
+            button {
+                width: 40px;
+                margin-left: 0px;
+                
+                border-radius: $radius;
+                
+                text-align: center;
+                color: rgba(#000,0.3); 
+                cursor: pointer;
+            }
+
+            button:hover {
+                @include shadow;
+            }
+
+            button:active {
+                @include shadow(inset);
+                background-color: rgba(#000,0.1);
             }
         }
 
-        div.inline:hover {
-            background-color: rgba(255, 255, 255, 0.6);
+        button.post {
+            @include preformat(block, 15px auto, 20px 40px);
+            border: none;
+
+            border-radius: $radius;
+            @include emboss;
+            @include bg-linear-gradient(#ff8800,$orange);
+
+            font-family: $font2, sans-serif;
+            font-size: 1em;
+            text-transform: uppercase;
+            text-align: center;
+            //color: white;
+            color: rgba(#000,0.3);
+            cursor: pointer;
+
+            @include transition(box-shadow,0.3s);
+        }
+
+        button:active {
+            box-shadow: none;
         }
     }
 }
