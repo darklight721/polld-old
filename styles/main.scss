@@ -114,7 +114,7 @@ header {
 
         border-radius: 0px 0px $radius $radius;
         box-shadow: 0 0 5px 1px rgba(0,0,0,0.2);
-        @include bg-linear-gradient($orange, #ff8800);
+        @include bg-linear-gradient($orange, $orange+#002200);
 
         color: rgba(#fff,0.8);
         font-size: 4em;
@@ -159,6 +159,10 @@ section.body {
             overflow: hidden;
         }
 
+        input.question:hover {
+            border: solid 5px $orange+#002200;
+        }
+
         input.question:focus {
             @include bg-linear-gradient(#fff,#fff);
         }
@@ -172,7 +176,7 @@ section.body {
             
             border-radius: $radius;
             @include emboss;
-            @include bg-linear-gradient(#ff8800,$orange);
+            @include bg-linear-gradient($orange+#002200,$orange);
             
             overflow: hidden;
 
@@ -228,26 +232,33 @@ section.body {
             }
         }
 
+        div.inline:hover {
+            @include bg-linear-gradient($orange+#003300,$orange);
+        }
+
         button.post {
             @include preformat(block, 15px auto, 20px 40px);
             border: none;
 
             border-radius: $radius;
             @include emboss;
-            @include bg-linear-gradient(#ff8800,$orange);
+            @include bg-linear-gradient($orange+#002200,$orange);
 
             font-family: $font2, sans-serif;
             font-size: 1em;
             text-transform: uppercase;
             text-align: center;
-            //color: white;
             color: rgba(#000,0.3);
             cursor: pointer;
 
             @include transition(box-shadow,0.3s);
         }
 
-        button:active {
+        button.post:hover {
+            @include bg-linear-gradient($orange+#003300,$orange);
+        }
+
+        button.post:active {
             box-shadow: none;
         }
     }
