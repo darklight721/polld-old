@@ -1,5 +1,6 @@
 $green: #52ca9e;
 $orange: #ff6600;
+$red: #cc0000;
 
 $font: wire-one;
 $font2: 'PT Sans Caption';
@@ -136,10 +137,49 @@ section.body {
 
     form {
         @include preformat(block, auto, 0px);
-        width: 900px;
+        max-width: 1000px;
 
         font-family: $font2, sans-serif;
         text-align: center;
+
+        .ctrl-group {
+            @include preformat(inline-block,0,0);
+            position: relative;
+
+            .error {
+                position: absolute;
+                width: 90%;
+                top: 100%;
+                left: 50%;
+                margin-left: -45%;
+                padding: 3px;
+
+                border-radius: 0 0 $radius $radius;
+                background-color: rgba($red,0.8);
+
+                font-family: verdana;
+                font-size: 0.8em;
+                color: #aaa;
+
+                z-index: 99;
+            }
+
+            .error:before {
+                position: absolute;
+                width: 0;
+                height: 0;
+                top: 0;
+                left: 50%;
+                margin-top: -5px;
+                margin-left: -5px;
+
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-bottom: 5px solid rgba($red,0.8);
+                
+                content: '';
+            }
+        }
 
         input.question {
             @include preformat(inline-block, 0px, 10px);
@@ -168,11 +208,11 @@ section.body {
         }
 
         ul li {
-            display: inline-block;
+            @include preformat(inline-block, 0px 5px 5px 0px, 0px);
         }
 
         div.inline {
-            @include preformat(inline-block, 0px 0px 5px 5px, 0px);
+            @include preformat(inline-block, 0px, 0px);
             
             border-radius: $radius;
             @include emboss;
@@ -230,6 +270,10 @@ section.body {
                 @include shadow(inset);
                 background-color: rgba(#000,0.1);
             }
+        }
+
+        div.inline.new-choice {
+            //margin: 0px 5px 5px 0px;
         }
 
         div.inline:hover {

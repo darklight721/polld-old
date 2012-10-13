@@ -2,6 +2,7 @@
 
 polldApp.controller('MainCtrl', function($scope, Polls) {
   $scope.poll = { choices : [] };
+  $scope.errors = {};
   
   $scope.addChoice = function() {
   	if ($scope.newChoice) {
@@ -11,6 +12,9 @@ polldApp.controller('MainCtrl', function($scope, Polls) {
       });
   		$scope.newChoice = '';
   	}
+    else {
+      $scope.errors.newChoice = true;
+    }
   };
   
   $scope.removeChoice = function(index) {
@@ -18,11 +22,44 @@ polldApp.controller('MainCtrl', function($scope, Polls) {
   };
 
   $scope.save = function() {
-    if ($scope.form.$valid) {
+    if (isValidated()) {
       Polls.post(angular.toJson($scope.poll), function(results, error){
         console.log(results + ' ' + error);
       });
     }
+  };
+
+  $scope.isChoiceEmpty = function(index) {
+    return $scope.poll.choices[index].name ? false : true;
+  };
+
+  $scope.isChoiceDuplicate = function(index) {
+    var currentChoice = $scope.poll.choices[index];
+    return _.any($scope.poll.choices, function(choice, idx){
+      return (index !== idx) ? currentChoice.name === choice.name : false;
+    });
+  };
+
+  function isQuestionEmpty() {
+    $scope.errors.question = $scope.poll.question ? false : true;
+    return $scope.errors.question;
+  };
+
+  function hasNoChoices() {
+    $scope.errors.choices = $scope.poll.choices.length === 0 ? true : false;
+    return $scope.errors.choices;
+  }
+
+  function isValidated() {
+    var hasErrors = false;
+
+    hasErrors = isQuestionEmpty();
+    hasErrors = hasNoChoices() || hasErrors;
+    hasErrors = _.any($scope.poll.choices, function(choice,index){
+      return $scope.isChoiceEmpty(index) || $scope.isChoiceDuplicate(index);
+    }) || hasErrors;
+
+    return !hasErrors;
   };
 
 });

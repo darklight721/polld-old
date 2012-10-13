@@ -1,14 +1,35 @@
 <form name="form">
-	<input class="question" ng-model="poll.question" type="text" placeholder="Type your poll question here." required />
+	<div class="ctrl-group">
+		<input name="question" class="question" ng-model="poll.question" type="text" placeholder="Type your poll question here." maxlength="128" required ng-change="errors.question=false" />
+		<span class="error" ng-show="form.question.$dirty && form.question.$invalid || errors.question" >
+			Hey, you shouldn't leave this one empty.
+		</span>
+	</div>
 	<ul>
 		<li ng-repeat="choice in poll.choices">
-			<div class="inline">
-				<input type="text" class="choice" ng-model="choice.name" required /><button type="button" class="remove" ng-click="removeChoice($index)">-</button>
+			<div class="ctrl-group">
+				<div class="inline">
+					<input type="text" ng-model="choice.name" maxlength="128" required /><button type="button" ng-click="removeChoice($index)">-</button>
+				</div>
+				<span class="error" ng-show="isChoiceDuplicate($index)" >
+					You've already added this.
+				</span>
+				<span class="error" ng-show="isChoiceEmpty($index)" >
+					Hey, you shouldn't leave this one empty.
+				</span>
 			</div>
 		</li>
 	</ul>
-	<div class="inline">
-		<input type="text" class="choice" ng-model="newChoice" placeholder="Add some poll choices here." ng-enter="addChoice()" /><button type="button" class="add" ng-click="addChoice()">+</button>
+	<div class="ctrl-group">
+		<div class="inline new-choice">
+			<input type="text" ng-model="newChoice" placeholder="Add some poll choices here." ng-enter="addChoice()" ng-change="errors.newChoice=false;errors.choices=false" maxlength="128" /><button type="button" ng-click="addChoice()">+</button>
+		</div>
+		<span class="error" ng-show="errors.newChoice" >
+			You can't add a blank choice.
+		</span>
+		<span class="error" ng-show="errors.choices" >
+			You haven't added any choices yet.
+		</span>
 	</div>
 	<button type="button" class="post" ng-click="save()">Post</button>
 </form>
