@@ -1,9 +1,9 @@
 'use strict';
 
-polldApp.controller('VoteCtrl', function($scope, $routeParams) {
+polldApp.controller('VoteCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
   $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Testacular'
   ];
-});
+}]);

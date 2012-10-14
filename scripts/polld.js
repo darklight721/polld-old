@@ -41,12 +41,12 @@ polldApp.directive('ngEnter', function() {
     template: '<nav><ul ng-transclude></ul></nav>',
     replace: true
   };
-}).directive('navItem', function($location){
+}).directive('navItem', ['$location', function($location){
   return {
     restrict: 'E',
     transclude: true,
     scope: { path: '@' },
-    controller: function($scope, $location) {
+    controller: ['$scope', '$location', function($scope, $location) {
       $scope.selected = false;
       
       $scope.$watch(function(){
@@ -54,8 +54,8 @@ polldApp.directive('ngEnter', function() {
       }, function(path){
         $scope.selected = path === $scope.path;
       });
-    },
+    }],
     template: '<li ng-class="{active:selected}"><a ng-href="#{{path}}" ng-transclude></a></li>',
     replace: true
   };
-});
+}]);

@@ -1,6 +1,6 @@
 'use strict';
 
-polldApp.controller('MainCtrl', function($scope, Polls) {
+polldApp.controller('MainCtrl', ['$scope', 'Polls', function($scope, Polls) {
   $scope.poll = { choices : [] };
   $scope.errors = {};
   
@@ -62,4 +62,4 @@ polldApp.controller('MainCtrl', function($scope, Polls) {
     return !hasErrors;
   };
 
-});
+}]);
