@@ -1,1 +1,4 @@
-<p>This is the vote partial.</p>
+<p>{{poll.question}}</p>
+<ul>
+	<li ng-repeat="choice in poll.choices">{{choice.name}}</li>
+</ul>

@@ -95,17 +95,17 @@ header {
                     color: inherit;
                     text-decoration: none;
                 }
-            }
-            
-            li.active {
-                color: $orange;
-                box-shadow: 0 0 3px 0px rgba(#000,0.1) inset;
-                @include bg-linear-gradient(#eaeaea, #fff);
-            }
 
-            li:hover {
-                box-shadow: 0 0 3px 0px rgba(#000,0.1) inset;
-                @include bg-linear-gradient(#eaeaea, #fff);
+                &.active {
+                    color: $orange;
+                    box-shadow: 0 0 3px 0px rgba(#000,0.1) inset;
+                    @include bg-linear-gradient(#eaeaea, #fff);
+                }
+
+                &:hover {
+                    box-shadow: 0 0 3px 0px rgba(#000,0.1) inset;
+                    @include bg-linear-gradient(#eaeaea, #fff);
+                }
             }
         }
     }
@@ -124,10 +124,10 @@ header {
         cursor: pointer;
 
         @include transition(padding, 0.5s);
-    }
 
-    span.brand:hover {
-        padding-bottom: 40px;
+        &:hover {
+            padding-bottom: 40px;
+        }
     }
 }
 
@@ -147,12 +147,15 @@ section.body {
             position: relative;
 
             .error {
+                $width: 300px;
+                $padding: 3px;
+
                 position: absolute;
-                width: 90%;
+                width: $width;
                 top: 100%;
                 left: 50%;
-                margin-left: -45%;
-                padding: 3px;
+                margin-left: -$width/2 - $padding;
+                padding: $padding;
 
                 border-radius: 0 0 $radius $radius;
                 background-color: rgba($red,0.8);
@@ -162,22 +165,22 @@ section.body {
                 color: #aaa;
 
                 z-index: 99;
-            }
 
-            .error:before {
-                position: absolute;
-                width: 0;
-                height: 0;
-                top: 0;
-                left: 50%;
-                margin-top: -5px;
-                margin-left: -5px;
+                &:before {
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    top: 0;
+                    left: 50%;
+                    margin-top: -5px;
+                    margin-left: -5px;
 
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                border-bottom: 5px solid rgba($red,0.8);
-                
-                content: '';
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-bottom: 5px solid rgba($red,0.8);
+                    
+                    content: '';
+                }
             }
         }
 
@@ -197,14 +200,14 @@ section.body {
             color: $orange;
             
             overflow: hidden;
-        }
 
-        input.question:hover {
-            border: solid 5px $orange+#002200;
-        }
+            &:hover {
+                border: solid 5px $orange+#002200;
+            }
 
-        input.question:focus {
-            @include bg-linear-gradient(#fff,#fff);
+            &:focus {
+                @include bg-linear-gradient(#fff,#fff);
+            }
         }
 
         ul li {
@@ -244,11 +247,11 @@ section.body {
                 font-family: wire-one;
                 font-weight: bold;
                 color: white;
-            }
 
-            input:focus {
-                background-color: transparent;
-                @include shadow;
+                &:focus {
+                    background-color: transparent;
+                    @include shadow;
+                }
             }
 
             button {
@@ -260,28 +263,24 @@ section.body {
                 text-align: center;
                 color: rgba(#000,0.3); 
                 cursor: pointer;
+
+                &:hover {
+                    @include shadow;
+                }
+
+                &:active {
+                    @include shadow(inset);
+                    background-color: rgba(#000,0.1);
+                }
             }
 
-            button:hover {
-                @include shadow;
+            &:hover {
+                @include bg-linear-gradient($orange+#003300,$orange);
             }
-
-            button:active {
-                @include shadow(inset);
-                background-color: rgba(#000,0.1);
-            }
-        }
-
-        div.inline.new-choice {
-            //margin: 0px 5px 5px 0px;
-        }
-
-        div.inline:hover {
-            @include bg-linear-gradient($orange+#003300,$orange);
         }
 
         button.post {
-            @include preformat(block, 15px auto, 20px 40px);
+            @include preformat(inline-block, 0px, 20px 40px);
             border: none;
 
             border-radius: $radius;
@@ -296,14 +295,14 @@ section.body {
             cursor: pointer;
 
             @include transition(box-shadow,0.3s);
-        }
 
-        button.post:hover {
-            @include bg-linear-gradient($orange+#003300,$orange);
-        }
+            &:hover {
+                @include bg-linear-gradient($orange+#003300,$orange);
+            }
 
-        button.post:active {
-            box-shadow: none;
+            &:active {
+                box-shadow: none;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@
 			Hey, you shouldn't leave this one empty.
 		</span>
 	</div>
+	<br/>
 	<ul>
 		<li ng-repeat="choice in poll.choices">
 			<div class="ctrl-group">
@@ -31,5 +32,12 @@
 			You haven't added any choices yet.
 		</span>
 	</div>
-	<button type="button" class="post" ng-click="save()">Post</button>
+	<br/>
+	<br/>
+	<div class="ctrl-group">
+		<button type="button" class="post" ng-click="save()">Post</button>
+		<span class="error" ng-show="errors.post" style="border-radius:3px;" >
+			Uh oh, something went wrong.<br/>Please try again.
+		</span>
+	</div>
 </form>
