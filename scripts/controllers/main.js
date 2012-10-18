@@ -26,8 +26,10 @@ polldApp.controller('MainCtrl', ['$scope', '$window', 'Polls', function($scope, 
       Polls.post(angular.toJson($scope.poll), function(poll, error){
         console.log(poll);
         console.log(error);
-        if (error || !poll.id) {
-          $scope.errors.post = true;
+        if (error || !poll) {
+          $scope.$apply(function(){
+            $scope.errors.post = true;
+          });
         }
         else {
           $window.location.href = '#/' + poll.id;
