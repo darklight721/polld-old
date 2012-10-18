@@ -1,6 +1,6 @@
 'use strict';
 
-polldApp.controller('MainCtrl', ['$scope', '$window', 'Polls', function($scope, $window, Polls) {
+polldApp.controller('MainCtrl', ['$scope', '$location', 'Polls', function($scope, $location, Polls) {
   $scope.poll = { choices : [] };
   $scope.errors = {};
   
@@ -24,16 +24,15 @@ polldApp.controller('MainCtrl', ['$scope', '$window', 'Polls', function($scope, 
   $scope.save = function() {
     if (isValidated()) {
       Polls.post(angular.toJson($scope.poll), function(poll, error){
-        console.log(poll);
-        console.log(error);
-        if (error || !poll) {
-          $scope.$apply(function(){
+        $scope.$apply(function(){
+          if (error || !poll) {
             $scope.errors.post = true;
-          });
-        }
-        else {
-          $window.location.href = '#/' + poll.id;
-        }
+          }
+          else {
+            $scope.errors.post = false;
+            $location.path('/' + poll.id);
+          }
+        });
       });
     }
   };
